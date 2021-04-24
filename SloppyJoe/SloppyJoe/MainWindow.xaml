@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SloppyJoe"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="550">
-    <Grid Margin="20">
+    <Grid x:Name ="mainGrid" Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />

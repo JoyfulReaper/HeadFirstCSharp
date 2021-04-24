@@ -10,9 +10,9 @@ namespace SloppyJoe
     {
         private static Random _randomizer = new Random();
 
-        public string[] Proteins = { "Roast Beef", "Salami", "Turkey", "Ham", "Pastrami", "Tofu" };
-        public string[] Condiments = { "yellow mustard", "brown mustard", "honey mustard", "mayo", "relish", "french dressing" };
-        public string[] Breads = { "rye", "white", "wheat", "pumpernickel", "a roll" };
+        public string[] Proteins { get; set; } = { "Roast Beef", "Salami", "Turkey", "Ham", "Pastrami", "Tofu" };
+        public string[] Condiments { get; set; } = { "yellow mustard", "brown mustard", "honey mustard", "mayo", "relish", "french dressing" };
+        public string[] Breads { get; set; } = { "rye", "white", "wheat", "pumpernickel", "a roll" };
 
         public string Description { get; set; } = string.Empty;
         public string Price
