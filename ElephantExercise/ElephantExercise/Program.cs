@@ -27,6 +27,14 @@ namespace ElephantExercise
                     case '3':
                         SwapReferences(ref lloyd, ref lucinda);
                         break;
+                    case '4':
+                        lloyd = lucinda;
+                        lloyd.EarSize = 4321;
+                        lloyd.WhoAmI();
+                        break;
+                    case '5':
+                        lucinda.SpeakTo(lloyd, "Hi, Lloyd!");
+                        break;
                     case 'q':
                     case 'Q':
                         Environment.Exit(0);
