@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SloppyJoe"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="550">
+        Title="Sloppy Joes" Height="350" Width="550">
     <Grid x:Name ="mainGrid" Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition />
