@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,43 +11,62 @@ namespace SwordDamageWPF
         public const int BASE_DAMAGE = 3;
         public const int FLAME_DAMAGE = 2;
 
-        public int Roll;
-        private decimal _magicMultiplier = 1M;
-        private int _flamingDamage = 0;
-        public int Damage;
+        public int Roll
+        {
+            get => _roll;
+            set
+            {
+                _roll = value;
+                CalculateDamage();
+            }
+        }
+
+        public bool Flaming
+        {
+            get => _flaming;
+            set
+            {
+                _flaming = value;
+                CalculateDamage();
+            }
+        }
+
+        public bool Magic
+        {
+            get => _magic;
+            set
+            {
+                _magic = value;
+                CalculateDamage();
+            }
+        }
+
+        public int Damage { get; private set; }
+
+        private int _roll;
+        private bool _flaming;
+        private bool _magic;
+
+        public SwordDamage(int initialRoll)
+        {
+            _roll = initialRoll;
+        }
 
         private void CalculateDamage()
         {
-            Damage = (int)(Roll * _magicMultiplier) + BASE_DAMAGE + _flamingDamage;
-            Debug.WriteLine($"CalculateDamage finished: {Damage} (roll: {Roll})");
-        }
+            decimal magicMultiplier = 1M;
 
-        public void SetMagic(bool isMagic)
-        {
-            if(isMagic)
+            if(_magic)
             {
-                _magicMultiplier = 1.75M;
-            }
-            else
-            {
-                _magicMultiplier = 1M;
+                magicMultiplier = 1.75M;
             }
 
-            CalculateDamage();
-
-            Debug.WriteLine($"SetMagic finished: {Damage} (roll: {Roll})");
-        }
-
-        public void SetFlaming(bool isFlaming)
-        {
-            CalculateDamage();
-
-            if(isFlaming)
+            Damage = BASE_DAMAGE;
+            Damage = (int)(Roll * magicMultiplier) + BASE_DAMAGE;
+            if(_flaming)
             {
                 Damage += FLAME_DAMAGE;
             }
-
-            Debug.WriteLine($"SetFlaming finished: {Damage} (roll: {Roll})");
         }
     }
 }

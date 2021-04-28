@@ -21,51 +21,48 @@ namespace SwordDamageWPF
     public partial class MainWindow : Window
     {
         Random _random = new Random();
-        SwordDamage _swordDamage = new SwordDamage();
+        SwordDamage _swordDamage;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _swordDamage.SetMagic(false);
-            _swordDamage.SetFlaming(false);
-            RollDice();
+            _swordDamage = new SwordDamage(_random.Next(1, 7) + _random.Next(1, 7) + _random.Next(1, 7));
+            DisplayDamage();
         }
 
         public void RollDice()
         {
             _swordDamage.Roll = _random.Next(1, 7) + _random.Next(1, 7) + _random.Next(1, 7);
-            _swordDamage.SetFlaming(flaming.IsChecked.Value);
-            _swordDamage.SetMagic(magic.IsChecked.Value);
             DisplayDamage();
         }
 
         void DisplayDamage()
         {
-            damage.Text = "Rolled " + _swordDamage.Roll + " for " + _swordDamage.Damage + " HP";
+            damage.Text = $"Rolled {_swordDamage.Roll} for {_swordDamage.Damage}  HP";
         }
 
         private void flaming_Checked(object sender, RoutedEventArgs e)
         {
-            _swordDamage.SetFlaming(true);
+            _swordDamage.Flaming = true;
             DisplayDamage();
         }
 
         private void flaming_Unchecked(object sender, RoutedEventArgs e)
         {
-            _swordDamage.SetFlaming(false);
+            _swordDamage.Flaming = false;
             DisplayDamage();
         }
 
         private void magic_Checked(object sender, RoutedEventArgs e)
         {
-            _swordDamage.SetMagic(true);
+            _swordDamage.Magic = true;
             DisplayDamage();
         }
 
         private void magic_Unchecked(object sender, RoutedEventArgs e)
         {
-            _swordDamage.SetMagic(false);
+            _swordDamage.Magic = false;
             DisplayDamage();
         }
 
