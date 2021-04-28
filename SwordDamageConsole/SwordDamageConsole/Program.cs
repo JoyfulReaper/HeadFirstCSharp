@@ -4,10 +4,12 @@ namespace SwordDamageConsole
 {
     class Program
     {
+        private static Random random = new Random();
+
         static void Main(string[] args)
         {
-            SwordDamage swordDamage = new SwordDamage();
-            Random random = new Random();
+            SwordDamage swordDamage = new SwordDamage(RollDice());
+            
 
             while(true)
             {
@@ -20,18 +22,17 @@ namespace SwordDamageConsole
                     Environment.Exit(0);
                 }
 
-                int roll = 0;
-                for (int i = 0; i < 3; i++)
-                {
-                    roll += random.Next(1, 7);
-                }
-                swordDamage.Roll = roll;
-
-                swordDamage.SetMagic(keyPressed == '1' || keyPressed == '3');
-                swordDamage.SetFlaming(keyPressed == '2' || keyPressed == '3');
+                swordDamage.Roll = RollDice();
+                swordDamage.Magic = (keyPressed == '1' || keyPressed == '3');
+                swordDamage.Flaming = (keyPressed == '2' || keyPressed == '3');
 
                 Console.WriteLine($"Rolled {swordDamage.Roll} for {swordDamage.Damage} HP\n\n");
             }
+        }
+
+        private static int RollDice()
+        {
+            return random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
         }
     }
 }
