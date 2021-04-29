@@ -14,7 +14,14 @@ namespace PigeonAndOstrich
 
             for (int i = 0; i < numberOfEggs; i++)
             {
-                output.Add(new Egg(Randomizer.NextDouble() * 2 + 1, "white"));
+                if (Randomizer.Next(4) == 0)
+                {
+                    output.Add(new BrokenEgg("white"));
+                }
+                else
+                {
+                    output.Add(new Egg(Randomizer.NextDouble() * 2 + 1, "white"));
+                }
             }
 
             return output;
