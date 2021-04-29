@@ -6,54 +6,15 @@ using System.Threading.Tasks;
 
 namespace WeaponDamage
 {
-    class ArrowDamage
+    class ArrowDamage : WeaponDamage
     {
         public const decimal BASE_MULTIPLIER = 0.35M;
         public const decimal MAGIC_MULTIPLIER = 2.5M;
         public const decimal FLAME_DAMAGE = 1.25M;
 
-        public int Roll
-        {
-            get => _roll;
-            set
-            {
-                _roll = value;
-                CalculateDamage();
-            }
-        }
+        public ArrowDamage(int initialRoll) : base (initialRoll) { }
 
-        public bool Flaming
-        {
-            get => _flaming;
-            set
-            {
-                _flaming = value;
-                CalculateDamage();
-            }
-        }
-
-        public bool Magic
-        {
-            get => _magic;
-            set
-            {
-                _magic = value;
-                CalculateDamage();
-            }
-        }
-
-        public int Damage { get; private set; }
-
-        private int _roll;
-        private bool _flaming;
-        private bool _magic;
-
-        public ArrowDamage(int initialRoll)
-        {
-            _roll = initialRoll;
-        }
-
-        private void CalculateDamage()
+        protected override void CalculateDamage()
         {
             decimal baseDamage = Roll * BASE_MULTIPLIER;
             if (Magic)

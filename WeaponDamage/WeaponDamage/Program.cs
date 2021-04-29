@@ -33,14 +33,14 @@ namespace WeaponDamage
                         swordDamage.Magic = (keyPressed == '1' || keyPressed == '3');
                         swordDamage.Flaming = (keyPressed == '2' || keyPressed == '3');
 
-                        Console.WriteLine($"\nRolled {swordDamage.Roll} for {swordDamage.Damage} HP\n\n");
+                        Console.WriteLine($"\nRolled {swordDamage.Roll} for {swordDamage.Damage} HP\n");
                         break;
                     case 'a':
                         arrowDamage.Roll = RollDice(1);
                         arrowDamage.Magic = (keyPressed == '1' || keyPressed == '3');
                         arrowDamage.Flaming = (keyPressed == '2' || keyPressed == '3');
 
-                        Console.WriteLine($"\nRolled {arrowDamage.Roll} for {arrowDamage.Damage} HP\n\n");
+                        Console.WriteLine($"\nRolled {arrowDamage.Roll} for {arrowDamage.Damage} HP\n");
                         break;
                     default:
                         return;
