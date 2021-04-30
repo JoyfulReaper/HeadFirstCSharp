@@ -9,7 +9,7 @@ namespace BeehiveManagementSystem
     static class HoneyVault
     {
         public const float NECTAR_CONVERSION_RATIO = .19f;
-        public const float LOW_LEVEL_WARNING = 100f;
+        public const float LOW_LEVEL_WARNING = 10f;
 
         public static string StatusReport
         {
@@ -17,13 +17,18 @@ namespace BeehiveManagementSystem
             {
                 StringBuilder sb = new StringBuilder();
 
-                sb.AppendLine("Honey Valut status report:");
-                sb.AppendLine($"Honey: {_honey}");
-                sb.AppendLine($"Nectar: {_honey}");
+                sb.AppendLine("Vault Report:");
+                sb.AppendLine($"{_honey:0.0} units of honey");
+                sb.AppendLine($"{_nectar:0.0} units of nectar");
 
-                if(_honey < LOW_LEVEL_WARNING)
+                if(_nectar < LOW_LEVEL_WARNING)
                 {
-                    sb.AppendLine("LOW HONEY - ADD A HONEY MANUFACTURER");
+                    sb.AppendLine("LOW NECTAR - ADD A NECTAR COLLECTOR");
+                }
+
+                if (_honey < LOW_LEVEL_WARNING)
+                {
+                    sb.AppendLine("LOW HONEY - ADD A HONEY MANUFACURER");
                 }
 
                 return sb.ToString();
@@ -60,7 +65,7 @@ namespace BeehiveManagementSystem
 
         public static bool ConsumeHoney(float amount)
         {
-            if(amount < _honey)
+            if(amount > _honey)
             {
                 return false;
             }

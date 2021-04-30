@@ -20,9 +20,25 @@ namespace BeehiveManagementSystem
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Queen _queen = new Queen();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            statusReport.Text = _queen.StatusReport;
+        }
+
+        private void AssignJob_Click(object sender, RoutedEventArgs e)
+        {
+            _queen.AssignBee(jobSelector.Text);
+            statusReport.Text = _queen.StatusReport;
+        }
+
+        private void WorkShift_Click(object sender, RoutedEventArgs e)
+        {
+            _queen.WorkTheNextShift();
+            statusReport.Text = _queen.StatusReport;
         }
     }
 }
