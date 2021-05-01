@@ -8,7 +8,7 @@ namespace PlanetMission
         {
             Console.WriteLine(new Venus().MissionInfo());
             Console.WriteLine(new Mars().MissionInfo());
-            Console.WriteLine(new PlanetMission().MissionInfo());
+            //Console.WriteLine(new PlanetMission().MissionInfo());
         }
     }
 }
