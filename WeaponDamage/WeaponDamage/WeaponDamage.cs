@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeaponDamage
 {
-    class WeaponDamage
+    abstract class WeaponDamage
     {
         private int _roll;
         private bool _flaming;
@@ -50,6 +50,6 @@ namespace WeaponDamage
 
         public int Damage { get; protected set; }
 
-        protected virtual void CalculateDamage() { Damage = Roll; }
+        protected abstract void CalculateDamage();
     }
 }
