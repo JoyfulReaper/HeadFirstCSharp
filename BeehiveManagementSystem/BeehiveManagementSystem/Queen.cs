@@ -33,7 +33,7 @@ namespace BeehiveManagementSystem
             }
         }
 
-        private List<Bee> _workers = new List<Bee>();
+        private List<IWorker> _workers = new List<IWorker>();
         private float _unassignedWorkers = 3;
         private float _eggs = 0;
 
@@ -56,7 +56,7 @@ namespace BeehiveManagementSystem
         protected override void DoJob()
         {
             _eggs += EGGS_PER_SHIFT;
-            foreach (Bee bee in _workers)
+            foreach (IWorker bee in _workers)
             {
                 bee.WorkTheNextShift();
             }
@@ -80,7 +80,7 @@ namespace BeehiveManagementSystem
             }
         }
 
-        private void AddWorker(Bee bee)
+        private void AddWorker(IWorker bee)
         {
             if (_unassignedWorkers >= 1)
             {
