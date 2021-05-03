@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HippoAndWolf
 {
-    class Hippo : Animal
+    class Hippo : Animal, ISwimmer
     {
         public override void MakeNoise()
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HippoAndWolf
 {
-    class Wolf : Canine
+    class Wolf : Canine, IPackHunter
     {
         public Wolf(bool belongsToPack)
         {
