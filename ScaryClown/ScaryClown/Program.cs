@@ -14,7 +14,8 @@ namespace ScaryClown
 
             if (fingersTheClown is IScaryClown iScaryClownReference)
             {
-                iScaryClownReference.ScareLittleChildren();
+                //iScaryClownReference.ScareLittleChildren();
+                iScaryClownReference.ScareAdults();
             }
             else
             {

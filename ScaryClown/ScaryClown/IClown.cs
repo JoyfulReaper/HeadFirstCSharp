@@ -8,7 +8,7 @@ namespace ScaryClown
 {
     interface IClown
     {
-        public static int CarCapacity
+        static int CarCapacity
         {
             get
             {
@@ -31,10 +31,10 @@ namespace ScaryClown
 
         protected static Random _random = new Random();
 
-        public string FunnyThingIHave { get; }
+        string FunnyThingIHave { get; }
         void Honk();
 
-        public static string ClownCarDescription()
+        static string ClownCarDescription()
         {
             return $"A clown car with {_random.Next(_carCapacity / 2, _carCapacity)} clowns";
         }
