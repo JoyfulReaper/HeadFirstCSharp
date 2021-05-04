@@ -1,41 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BeehiveManagementSystem
 {
-    class Queen : Bee
+    class Queen : Bee, INotifyPropertyChanged
     {
         public const float EGGS_PER_SHIFT = 0.45f;
         public const float HONEY_PER_UNASSIGNED_WORKER = 0.5f;
 
         public override float CostPerShift { get => 2.15f; }
-        public string StatusReport
-        {
-            get
-            {
-                var nc = _workers.Where(x => x.Job == "Nectar Collector").Count();
-                var hm = _workers.Where(x => x.Job == "Honey Manufacturer").Count();
-                var ec = _workers.Where(x => x.Job == "Egg Care").Count();
-
-                StringBuilder sb = new StringBuilder(HoneyVault.StatusReport);
-                sb.AppendLine();
-                sb.AppendLine($"Egg count: {_eggs}");
-                sb.AppendLine($"Unassigned Workers: {_unassignedWorkers}");
-                sb.AppendLine($"{nc} Nectar Collector bee{(nc > 1 ? "s" : "")}");
-                sb.AppendLine($"{hm} Honey Manufacturer bee{(hm > 1 ? "s" : "")}");
-                sb.AppendLine($"{ec} Egg Care bee{(ec > 1 ? "s" : "")}");
-                sb.AppendLine($"TOTAL WORKERS {_workers.Count}");
-
-                return sb.ToString();
-            }
-        }
+        public string StatusReport { get; private set; }
 
         private List<IWorker> _workers = new List<IWorker>();
         private float _unassignedWorkers = 3;
         private float _eggs = 0;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Queen() : base("Queen") 
         {
@@ -62,6 +46,7 @@ namespace BeehiveManagementSystem
             }
 
             HoneyVault.ConsumeHoney(HONEY_PER_UNASSIGNED_WORKER * _unassignedWorkers);
+            UpdateStatusReport();
         }
 
         public void AssignBee(string job)
@@ -78,6 +63,26 @@ namespace BeehiveManagementSystem
                     AddWorker(new HoneyManufacturer());
                     break;
             }
+            UpdateStatusReport();
+        }
+
+        private void UpdateStatusReport()
+        {
+            var nc = _workers.Where(x => x.Job == "Nectar Collector").Count();
+            var hm = _workers.Where(x => x.Job == "Honey Manufacturer").Count();
+            var ec = _workers.Where(x => x.Job == "Egg Care").Count();
+
+            StringBuilder sb = new StringBuilder(HoneyVault.StatusReport);
+            sb.AppendLine();
+            sb.AppendLine($"Egg count: {_eggs}");
+            sb.AppendLine($"Unassigned Workers: {_unassignedWorkers}");
+            sb.AppendLine($"{nc} Nectar Collector bee{(nc > 1 ? "s" : "")}");
+            sb.AppendLine($"{hm} Honey Manufacturer bee{(hm > 1 ? "s" : "")}");
+            sb.AppendLine($"{ec} Egg Care bee{(ec > 1 ? "s" : "")}");
+            sb.AppendLine($"TOTAL WORKERS {_workers.Count}");
+
+            StatusReport = sb.ToString();
+            OnPropertyChanged("StatusReport");
         }
 
         private void AddWorker(IWorker bee)
@@ -87,6 +92,11 @@ namespace BeehiveManagementSystem
                 _workers.Add(bee);
                 _unassignedWorkers--;
             }
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

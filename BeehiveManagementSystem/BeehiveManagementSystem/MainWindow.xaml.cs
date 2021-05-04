@@ -22,13 +22,13 @@ namespace BeehiveManagementSystem
     public partial class MainWindow : Window
     {
         private DispatcherTimer _timer = new DispatcherTimer();
-        private Queen _queen = new Queen();
+        private Queen _queen;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            statusReport.Text = _queen.StatusReport;
+            _queen = Resources["queen"] as Queen;
+            //statusReport.Text = _queen.StatusReport;
 
             _timer.Tick += Timer_Tick;
             _timer.Interval = TimeSpan.FromSeconds(1.5);
@@ -43,13 +43,13 @@ namespace BeehiveManagementSystem
         private void AssignJob_Click(object sender, RoutedEventArgs e)
         {
             _queen.AssignBee(jobSelector.Text);
-            statusReport.Text = _queen.StatusReport;
+            //statusReport.Text = _queen.StatusReport;
         }
 
         private void WorkShift_Click(object sender, RoutedEventArgs e)
         {
             _queen.WorkTheNextShift();
-            statusReport.Text = _queen.StatusReport;
+            //statusReport.Text = _queen.StatusReport;
         }
     }
 }
