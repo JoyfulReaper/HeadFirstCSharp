@@ -18,31 +18,31 @@ namespace Shoes
                 return;
             }
 
-            Console.WriteLine("\nThe show closet contains:");
-            for (int i = 1; i < shoes.Count; i++)
+            Console.WriteLine("\nThe shoe closet contains:");
+            for (int i = 0; i < shoes.Count; i++)
             {
-                Console.WriteLine($"Shoe #{i}: {shoes[i]}");
+                Console.WriteLine($"Shoe #{i + 1}: {shoes[i]}");
             }
         }
 
         public void AddShoe()
         {
-            Console.WriteLine("\nAdd a show");
+            Console.WriteLine("\nAdd a shoe");
             for(int i = 0; i < 6; i++)
             {
                 Console.WriteLine($"Press {i} to add a {(Style)i}");
             }
 
-            Console.WriteLine("Enter a style: ");
+            Console.Write("Enter a style: ");
             if(int.TryParse(Console.ReadKey().KeyChar.ToString(), out int style))
             {
                 if(!Enum.IsDefined(typeof(Style), style))
                 {
-                    Console.WriteLine("Not a valid style!");
+                    Console.WriteLine("\nNot a valid style!");
                     return;
                 }
 
-                Console.Write("Enter the color: ");
+                Console.Write("\nEnter the color: ");
                 string color = Console.ReadLine();
                 Shoe shoe = new Shoe((Style)style, color);
                 shoes.Add(shoe);
@@ -51,7 +51,7 @@ namespace Shoes
 
         public void RemoveShoe()
         {
-            Console.WriteLine("\nEnter the number of the show to remove: ");
+            Console.Write("\nEnter the number of the shoe to remove: ");
 
             if (int.TryParse(Console.ReadKey().KeyChar.ToString(), out int shoeNumber) &&
                 (shoeNumber >= 1) && (shoeNumber <= shoes.Count))
