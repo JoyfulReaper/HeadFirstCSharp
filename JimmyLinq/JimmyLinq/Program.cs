@@ -8,6 +8,8 @@ namespace JimmyLinq
     {
         static void Main(string[] args)
         {
+            AnotherDemo();
+            Console.WriteLine();
             TheOtherDemo();
             Console.WriteLine();
 
@@ -34,6 +36,26 @@ namespace JimmyLinq
             {
                 Console.WriteLine($"{comic}");
             }
+        }
+
+        private static void AnotherDemo()
+        {
+            Random rand = new();
+
+            var numbers = new List<int>();
+            int length = rand.Next(50, 150 + 1);
+            for(int i = 0; i < length; i++)
+            {
+                numbers.Add(rand.Next(100 + 1));
+            }
+
+            Console.WriteLine($@"Stats for these {numbers.Count()} numbers:
+The first 5 numbers: {String.Join(", ", numbers.Take(5))}
+The last 5 numbers: {String.Join(", ", numbers.TakeLast(5))}
+The first number is {numbers.First()} and the last is {numbers.Last()}
+The smallest is {numbers.Min()}, and the biggest is {numbers.Max()}
+The sum is {numbers.Sum()}
+The average is {numbers.Average():F2}");
         }
 
         private static void TheOtherDemo()
