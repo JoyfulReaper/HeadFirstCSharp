@@ -13,11 +13,11 @@ namespace JimmyLinq
             {
                 Console.WriteLine("\nPress G to group comics by price, R to get reviews, any other key to quit\n");
 
-                var choice = Console.ReadKey(true).KeyChar.ToString().ToUpper() switch
+                done = Console.ReadKey(true).KeyChar.ToString().ToUpper() switch
                 {
                     "G" => GroupComicsByPrice(),
                     "R" => GetReviews(),
-                    _ => done = true,
+                    _ => true,
                 };
 
                 //switch (Console.ReadKey(true).KeyChar.ToString().ToUpper())
