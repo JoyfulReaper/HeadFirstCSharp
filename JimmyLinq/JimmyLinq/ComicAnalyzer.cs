@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace JimmyLinq
 {
-    static class ComicAnalyzer
+    public static class ComicAnalyzer
     {
-        private static PriceRange CalculatePriceRange(Comic comic)
+        private static PriceRange CalculatePriceRange(Comic comic, IReadOnlyDictionary<int, decimal> prices)
         {
-            if (Comic.Prices[comic.Issue] < 100)
+            if (prices[comic.Issue] < 100)
             {
                 return PriceRange.Cheap;
             }
@@ -23,7 +23,7 @@ namespace JimmyLinq
             var groupedComics = 
                 from comic in comics
                 orderby prices[comic.Issue]
-                group comic by CalculatePriceRange(comic) into PriceGroup
+                group comic by CalculatePriceRange(comic, prices) into PriceGroup
                 select PriceGroup;
 
             return groupedComics;
@@ -36,7 +36,7 @@ namespace JimmyLinq
                 orderby comic.Issue
                 join review in reviews
                 on comic.Issue equals review.Issue
-                select $"{review.Critic} rated {comic.Issue} '{comic.Name}' {review.Score}";
+                select $"{review.Critic} rated #{comic.Issue} '{comic.Name}' {review.Score:0.00}";
 
             return reviewedComics;
         }
