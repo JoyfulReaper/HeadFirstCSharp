@@ -15,6 +15,16 @@ namespace YieldReturnDemo
 
         static void Main(string[] args)
         {
+            foreach(var p in new PowersOfTwoDemo())
+            {
+                Console.Write(p + " ");
+            }
+
+            Console.WriteLine();
+
+            var betterSports = new BetterSportSequence();
+            Console.WriteLine("sports[3]: " + betterSports[3]);
+
             foreach (var f in SimpleEnumberable())
             {
                 Console.WriteLine(f);
@@ -23,7 +33,7 @@ namespace YieldReturnDemo
             Console.WriteLine();
 
             var sports = new ManualSportSequence();
-            foreach(var s in sports)
+            foreach (var s in sports)
             {
                 Console.WriteLine(s);
             }
