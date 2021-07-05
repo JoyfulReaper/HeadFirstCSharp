@@ -56,12 +56,12 @@ namespace GoFish
             if (cards.Count() > 0)
             {
                 player.AddCardsAndPullOutBooks(cards);
-                message += $"{playerToAsk} has {cards.Count()} {valueToAskFor} card{Player.S(cards.Count())}";
+                message += $"{playerToAsk} has {cards.Count()} {valueToAskFor} card{Player.S(cards.Count())}"; // + Environment.NewLine;
             }
             else
             {
                 player.DrawCard(stock);
-                message += $"{player} drew a card";
+                message += $"{player} drew a card"; //+ Environment.NewLine;
             }
 
             if (player.Hand.Count() == 0)
