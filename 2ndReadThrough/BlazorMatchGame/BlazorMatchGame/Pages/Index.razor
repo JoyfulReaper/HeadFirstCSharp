@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using System.Timers
+@using BlazorMatchGame.Helpers
 
 <PageTitle>Animal Matching Game</PageTitle>
 
@@ -25,17 +26,7 @@
 
 @code {
     private static Random _random = new Random();
-    private List<string> _animalEmoji = new List<string>
-        {
-            "🦑", "🦑",
-            "👻", "👻",
-            "🐖", "🐖",
-            "👽", "👽",
-            "🦥", "🦥",
-            "🦄", "🦄",
-            "🐳", "🐳",
-            "🦉", "🦉",
-        };
+
     private List<string> _shuffledAnimals = new();
     private string _lastAnimalFound = string.Empty;
     private string _lastDescription = string.Empty;
@@ -55,6 +46,7 @@
 
     private void SetupGame()
     {
+        List<string> _animalEmoji = AnimalHelper.GetAnimals();
         _shuffledAnimals = _animalEmoji.OrderBy(a => _random.Next())
             .ToList();
 
