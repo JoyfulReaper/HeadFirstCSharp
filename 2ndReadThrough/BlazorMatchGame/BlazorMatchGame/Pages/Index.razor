@@ -1,4 +1,7 @@
 ﻿@page "/"
+
+@inject ApiHelper _apiHelper
+
 @using System.Timers
 @using BlazorMatchGame.Helpers
 
@@ -22,6 +25,28 @@
     <div class="row">
         <h2>Time: @_timeDisplay</h2>
     </div>
+
+    <div class="row mt-5">
+        <h6>High Scores</h6>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in _highScores)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Score</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 @code {
@@ -36,16 +61,19 @@
     private int _tenthsOfSecondsElapsed = 0;
     string _timeDisplay = string.Empty;
 
-    protected override void OnInitialized()
+    private IEnumerable<HighScore> _highScores = Enumerable.Empty<HighScore>();
+
+    protected override async Task OnInitializedAsync()
     {
         _timer = new Timer(100);
         _timer.Elapsed += Timer_Tick;
 
-        SetupGame();
+        await SetupGame();
     }
 
-    private void SetupGame()
+    private async Task SetupGame()
     {
+        _highScores = await _apiHelper.GetHighScores();
         List<string> _animalEmoji = AnimalHelper.GetAnimals();
         _shuffledAnimals = _animalEmoji.OrderBy(a => _random.Next())
             .ToList();
@@ -54,9 +82,9 @@
         _tenthsOfSecondsElapsed = 0;
     }
 
-    private void ButtonClick(string animal, string animalDescription)
+    private async Task ButtonClick(string animal, string animalDescription)
     {
-        if(_lastAnimalFound == string.Empty)
+        if (_lastAnimalFound == string.Empty)
         {
             _lastAnimalFound = animal;
             _lastDescription = animalDescription;
@@ -72,12 +100,13 @@
                 .ToList();
 
             _matchesFound++;
-            if(_matchesFound == 8)
+            if (_matchesFound == 8)
             {
                 _timer.Stop();
                 _timeDisplay += " - Play Again?";
 
-                SetupGame();
+                await _apiHelper.PostHighScore("Kyle", _tenthsOfSecondsElapsed / 10M);
+                await SetupGame();
             }
 
         }

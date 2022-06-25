@@ -35,11 +35,11 @@ public class HighScoreController : ControllerBase
         var result = new HighScoreResult();
         
         var scores = (await _highScores.GetHighScores()).ToList();
-        if (score.Score > scores.Min(s => s.Score) || !scores.Any())
+        if (!scores.Any() || score.Score < scores.Max(s => s.Score))
         {
             if(scores.Count >= 5)
             {
-                await _highScores.RemoveHighScore(scores.Min(s => s.Score));
+                await _highScores.RemoveHighScore(scores.Max(s => s.Score));
             }
 
             var highScore = new HighScore
