@@ -17,7 +17,7 @@ public class HighScores
     public async Task<IEnumerable<HighScore>> GetHighScores()
     {
         using IDbConnection connection = new SqliteConnection(_config.GetConnectionString("DefaultConnection"));
-        var scores = await connection.QueryAsync<HighScore>("SELECT * FROM HighScore ORDER BY Score DESC");
+        var scores = await connection.QueryAsync<HighScore>("SELECT * FROM HighScore ORDER BY Score ASC");
         return scores;
     }
 
