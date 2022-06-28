@@ -1,4 +1,2 @@
 Matching Game Even Better if... Page 48
-- Add different kinds of animals, so the same ones aren't used each time
-- Keep track of the players best time so they can try to beat it
 - Make the timer count down instead of up.
